@@ -231,6 +231,42 @@
       "date": "",
       "time": "5:00",
       "attendees": []
+    },
+    {
+      "id": 1255900,
+      "user": {
+        "id": "abc123",
+        "name": "Adam"
+      },
+      "category": "nature",
+      "organizer": {
+        "id": "abc123",
+        "name": "Adam"
+      },
+      "title": "foo bar",
+      "description": "an event",
+      "location": "someplace",
+      "date": "2019-09-03T21:47:00.000Z",
+      "time": "3:00",
+      "attendees": []
+    },
+    {
+      "id": 662144,
+      "user": {
+        "id": "abc123",
+        "name": "Adam"
+      },
+      "category": "animal welfare",
+      "organizer": {
+        "id": "abc123",
+        "name": "Adam"
+      },
+      "title": "new test",
+      "description": "test descrip",
+      "location": "atx",
+      "date": "2019-09-05T22:08:00.000Z",
+      "time": "3:00",
+      "attendees": []
     }
   ]
 }

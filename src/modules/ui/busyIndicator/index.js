@@ -25,6 +25,7 @@ export default {
     getters,
     actions
   },
+  MODULE_NAME,
   components,
   actionTypes: buildActionsTypes(actions, MODULE_NAME)
 }

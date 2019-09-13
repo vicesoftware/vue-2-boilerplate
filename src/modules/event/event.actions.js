@@ -1,6 +1,6 @@
 import * as types from './event.mutationTypes'
 import EventService from '@/services/EventService.js'
-import busyIndicator from '@/store/modules/busyIndicator'
+import busyIndicator from '@/modules/ui/busyIndicator'
 
 const { actionTypes } = busyIndicator
 

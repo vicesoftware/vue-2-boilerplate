@@ -8,15 +8,15 @@
 </template>
 
 <script>
-import NavBar from '@/components/NavBar.vue'
-import NotificationContainer from '@/components/NotificationContainer.vue'
-import BusyIndicator from '@/components/BusyIndicator.vue'
+import NavBar from '@/modules/layout/NavBar.vue'
+import NotificationContainer from '@/modules/ui/NotificationContainer.vue'
+import busyIndicator from '@/modules/ui/busyIndicator'
 
 export default {
   components: {
     NavBar,
     NotificationContainer,
-    BusyIndicator
+    BusyIndicator: busyIndicator.components.BusyIndicator
   }
 }
 </script>
