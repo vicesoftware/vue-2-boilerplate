@@ -3,6 +3,7 @@ import Router from 'vue-router'
 import EventCreate from './views/EventCreate.vue'
 import EventList from './views/EventList.vue'
 import EventShow from './views/EventShow.vue'
+import ProgramSelector from './views/ProgramSelector.vue'
 
 Vue.use(Router)
 
@@ -11,6 +12,11 @@ export default new Router({
   routes: [
     {
       path: '/',
+      name: 'program-selector',
+      component: ProgramSelector
+    },
+    {
+      path: '/event-list',
       name: 'event-list',
       component: EventList
     },

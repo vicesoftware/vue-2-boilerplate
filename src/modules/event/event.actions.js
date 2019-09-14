@@ -1,8 +1,6 @@
 import * as types from './event.mutationTypes'
 import EventService from '@/services/EventService.js'
-import busyIndicator from '@/modules/ui/busyIndicator'
-
-const { actionTypes } = busyIndicator
+import request from '@/modules/data/request'
 
 export const createEvent = ({ commit, dispatch }, event) => {
   return EventService.postEvent(event)
@@ -24,38 +22,15 @@ export const createEvent = ({ commit, dispatch }, event) => {
     })
 }
 
-export const fetchEvents = ({ commit, dispatch }, { perPage, page }) => {
-  dispatch(
-    actionTypes.increment,
-    { action: types.GET_EVENTS_RECEIVED },
-    { root: true }
-  )
-
-  EventService.getEvents(perPage, page)
-    .then(response => {
-      commit(
-        types.SET_EVENTS_TOTAL,
-        parseInt(response.headers['x-total-count'])
-      )
-      commit(types.GET_EVENTS_RECEIVED, response.data)
-      dispatch(
-        actionTypes.decrement,
-        { action: types.GET_EVENTS_RECEIVED },
-        { root: true }
-      )
-    })
-    .catch(error => {
-      const notification = {
-        type: 'error',
-        message: 'There was a problem fetching events: ' + error.message
-      }
-      commit(actionTypes.decrement, {
-        error,
-        action: types.GET_EVENTS_RECEIVED
-      })
-      dispatch('notification/add', notification, { root: true })
-    })
-}
+export const fetchEvents = ({ commit, dispatch }, { perPage, page }) =>
+  request('/events?_limit=' + perPage + '&_page=' + page, {
+    commit,
+    dispatch,
+    actionType: types.GET_EVENTS_RECEIVED,
+    errorMessage: 'Unable to fetch events',
+    onResponse: r =>
+      commit(types.SET_EVENTS_TOTAL, parseInt(r.headers.map['x-total-count']))
+  })
 
 export const fetchEvent = ({ commit, getters, dispatch }, id) => {
   var event = getters.getEventById(id)

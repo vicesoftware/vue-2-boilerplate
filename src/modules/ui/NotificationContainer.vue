@@ -1,10 +1,6 @@
 <template>
-  <div class="notification-container">
-    <NotificationBar
-      v-for="notification in notifications"
-      :key="notification.id"
-      :notification="notification"
-    />
+  <div>
+    <NotificationBar :key="notifications.id" :notifications="notifications" />
   </div>
 </template>
 
@@ -21,10 +17,4 @@ export default {
 </script>
 
 <style scoped>
-.notification-container {
-  position: fixed;
-  bottom: 0;
-  right: 0;
-  padding-right: 40px;
-}
 </style>

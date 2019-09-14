@@ -10,13 +10,13 @@
 <script>
 import NavBar from '@/modules/layout/NavBar.vue'
 import NotificationContainer from '@/modules/ui/NotificationContainer.vue'
-import busyIndicator from '@/modules/ui/busyIndicator'
+import BusyIndicator from '@/modules/ui/BusyIndicator'
 
 export default {
   components: {
     NavBar,
     NotificationContainer,
-    BusyIndicator: busyIndicator.components.BusyIndicator
+    BusyIndicator
   }
 }
 </script>

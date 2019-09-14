@@ -1,6 +1,7 @@
 <template>
-  <div class="notification-bar" :class="notificationTypeClass">
-    <p>{{ notification.message }}</p>
+  <div v-if="notifications && notifications.message" class="error-msg">
+    <i class="fa fa-times-circle"></i>
+    {{ notifications.message }}
   </div>
 </template>
 
@@ -9,7 +10,7 @@ import { mapActions } from 'vuex'
 
 export default {
   props: {
-    notification: {
+    notifications: {
       type: Object,
       required: true
     }
@@ -19,23 +20,27 @@ export default {
       timeout: null
     }
   },
-  mounted() {
-    this.timeout = setTimeout(() => this.remove(this.notification), 5000)
-  },
+  // mounted() {
+  //   this.timeout = setTimeout(() => this.remove(this.notification), 5000)
+  // },
   beforeDestroy() {
     clearTimeout(this.timeout)
-  },
-  computed: {
-    notificationTypeClass() {
-      return `-text-${this.notification.type}`
-    }
   },
   methods: mapActions('notification', ['remove'])
 }
 </script>
 
 <style scoped>
-.notification-bar {
-  margin: 1em 0 1em;
+.info-msg,
+.success-msg,
+.warning-msg,
+.error-msg {
+  margin: 10px 0;
+  padding: 10px;
+  border-radius: 3px 3px 3px 3px;
+}
+.error-msg {
+  color: #d8000c;
+  background-color: #ffbaba;
 }
 </style>
