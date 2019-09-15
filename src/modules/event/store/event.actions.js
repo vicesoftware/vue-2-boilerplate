@@ -1,6 +1,6 @@
 import * as types from './event.mutationTypes'
 import EventService from '@/services/EventService.js'
-import request from '@/modules/data/request'
+import request from '@/modules/common/request'
 
 export const createEvent = ({ commit, dispatch }, event) => {
   return EventService.postEvent(event)
