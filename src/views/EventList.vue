@@ -6,27 +6,20 @@
     </h1>
     <EventCard v-for="event in event.events" :key="event.id" :event="event" />
     <template v-if="page != 1">
-      <router-link
-        :to="{ name: 'event-list', query: { page: page - 1 } }"
-        rel="prev"
-        >Prev Page</router-link
-      >
-      <template v-if="hasNextPage"
-        >|</template
-      >
+      <router-link :to="{ name: 'event-list', query: { page: page - 1 } }" rel="prev">Prev Page</router-link>
+      <template v-if="hasNextPage">|</template>
     </template>
     <router-link
       v-if="hasNextPage"
       :to="{ name: 'event-list', query: { page: page + 1 } }"
       rel="next"
-      >Next Page</router-link
-    >
+    >Next Page</router-link>
   </div>
 </template>
 
 <script>
-import EventCard from '@/modules/event/EventCard.vue'
-import { mapState } from 'vuex'
+import EventCard from '@/features/event/EventCard.vue'
+import { mapState, mapActions } from 'vuex'
 
 export default {
   components: {
@@ -36,10 +29,14 @@ export default {
     this.perPage = 3 // Setting perPage here and not in data means it won't be reactive.
     // We don't need it to be reactive, and this way our component has access to it.
 
-    this.$store.dispatch('event/fetchEvents', {
+    this.fetchEvents({
+      // I don't know there is a store and could change if I wanted to
       perPage: this.perPage,
       page: this.page
     })
+  },
+  methods: {
+    ...mapActions({ fetchEvents: 'event/fetchEvents' })
   },
   computed: {
     page() {

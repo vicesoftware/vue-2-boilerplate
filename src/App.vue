@@ -8,9 +8,9 @@
 </template>
 
 <script>
-import NavBar from '@/modules/layout/NavBar.vue'
-import NotificationContainer from '@/modules/ui/NotificationContainer.vue'
-import BusyIndicator from '@/modules/ui/BusyIndicator'
+import NavBar from '@/layout/NavBar.vue'
+import NotificationContainer from '@/ui/NotificationContainer.vue'
+import BusyIndicator from '@/ui/BusyIndicator'
 
 export default {
   components: {

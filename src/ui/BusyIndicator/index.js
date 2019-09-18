@@ -2,7 +2,7 @@ import mutations from './store/busyIndicator.mutations'
 import * as getters from './store/busyIndicator.getters'
 import * as actions from './store/busyIndicator.actions'
 import BusyIndicator from './BusyIndicator'
-import { buildActionsTypes } from '@/modules/common/vuexUtilities'
+import { buildActionsTypes } from '@/common/vuexUtilities'
 
 const state = {
   count: 0

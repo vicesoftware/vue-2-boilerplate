@@ -1,44 +1,125 @@
-# real-world-vue
+# Bisk Vue Boilerplate
 
-## Following along?
+<!-- vscode-markdown-toc -->
 
-We encourage you to follow the course on Vue Mastery, and code along with us. This course has tags representing the start and finish of each level, just in case you get stuck. Here's the start and ending code of each lesson, if you'd like to download them.
+- 1. [Project setup](#Projectsetup)
+     _ 1.1. [Compiles and hot-reloads for development](#Compilesandhot-reloadsfordevelopment)
+     _ 1.2. [Compiles and minifies for production](#Compilesandminifiesforproduction) \* 1.3. [Lints and fixes files](#Lintsandfixesfiles)
+- 2. [Goals and Values](#GoalsandValues)
+- 3. [Best Practices](#BestPractices)
+     _ 3.1. [Don't access \$store in components](#Dontaccessstoreincomponents)
+     _ 3.1.1. [How to avoid \$store for actions](#Howtoavoidstoreforactions) \* 3.1.2. [How to avoid \$store for getters](#Howtoavoidstoreforgetters)
 
-| Lesson                               |                                                                                                              |                                                                                                               |
-| ------------------------------------ | ------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------- |
-| 2 - Vue CLI                          | n/a                                                                                                          | [Finished Code](https://github.com/Code-Pop/real-world-vue/releases/tag/lesson2-cli-finish)                   |
-| 3 - Optimizing your IDE              | [Starting Code](https://github.com/Code-Pop/real-world-vue/releases/tag/lesson3-editor-start)                | [Finished Code](https://github.com/Code-Pop/real-world-vue/releases/tag/lesson3-editor-finish)                |
-| 4 - Vue Router Basics                | [Starting Code](https://github.com/Code-Pop/real-world-vue/releases/tag/lesson4-routing-start)               | [Finished Code](https://github.com/Code-Pop/real-world-vue/releases/tag/lesson4-routing-finish)               |
-| 5 - Dynamic Routes & History Mode    | [Starting Code](https://github.com/Code-Pop/real-world-vue/releases/tag/lesson5-dynamic-routing-start)       | [Finished Code](https://github.com/Code-Pop/real-world-vue/releases/tag/lesson5-dynamic-routing-finish)       |
-| 6 - Single File Components           | [Starting Code](https://github.com/Code-Pop/real-world-vue/releases/tag/lesson6-sfc-start)                   | [Finished Code](https://github.com/Code-Pop/real-world-vue/releases/tag/lesson6-sfc-finish)                   |
-| 7 - Global Components                | [Starting Code](https://github.com/Code-Pop/real-world-vue/releases/tag/lesson7-global-start)                | [Finished Code](https://github.com/Code-Pop/real-world-vue/releases/tag/lesson7-global-finish)                |
-| 8 - Slots                            | [Starting Code](https://github.com/Code-Pop/real-world-vue/releases/tag/lesson8-slots-start)                 | [Finished Code](https://github.com/Code-Pop/real-world-vue/releases/tag/lesson8-slots-finish)                 |
-| 9 - API Calls with Axios             | [Starting Code](https://github.com/Code-Pop/real-world-vue/releases/tag/lesson9-axios-start)                 | [Finished Code](https://github.com/Code-Pop/real-world-vue/releases/tag/lesson9-axios-finish)                 |
-| 11 - Vuex State & Getters            | [Starting Code](https://github.com/Code-Pop/real-world-vue/releases/tag/lesson11-vuex-start)                 | [Finished Code](https://github.com/Code-Pop/real-world-vue/releases/tag/lesson11-vuex-finish)                 |
-| 12 - Vuex Mutations & Actions Part 1 | [Starting Code](https://github.com/Code-Pop/real-world-vue/releases/tag/lesson12-mutations%26actions1-start) | [Finished Code](https://github.com/Code-Pop/real-world-vue/releases/tag/lesson12-mutations%26actions1-finish) |
-| 13 - Vuex Mutations & Actions Part 2 | [Starting Code](https://github.com/Code-Pop/real-world-vue/releases/tag/lesson13-mutations%26actions2-start) | [Finished Code](https://github.com/Code-Pop/real-world-vue/releases/tag/lesson13-mutations%26actions2-finish) |
-| 13 - Vuex Modules                    | [Starting Code](https://github.com/Code-Pop/real-world-vue/releases/tag/lesson14-modules-start)              | [Finished Code](https://github.com/Code-Pop/real-world-vue/releases/tag/lesson14-modules-finish)              |
+<!-- vscode-markdown-toc-config
+	numbering=true
+	autoSave=true
+	/vscode-markdown-toc-config -->
+<!-- /vscode-markdown-toc -->
 
-## Project setup
+## 1. <a name='Projectsetup'></a>Project setup
 
 ```
 npm install
 ```
 
-### Compiles and hot-reloads for development
+### 1.1. <a name='Compilesandhot-reloadsfordevelopment'></a>Compiles and hot-reloads for development
 
 ```
 npm run serve
 ```
 
-### Compiles and minifies for production
+### 1.2. <a name='Compilesandminifiesforproduction'></a>Compiles and minifies for production
 
 ```
 npm run build
 ```
 
-### Lints and fixes files
+### 1.3. <a name='Lintsandfixesfiles'></a>Lints and fixes files
 
 ```
 npm run lint
 ```
+
+## 2. <a name='GoalsandValues'></a>Goals and Values
+
+1. Create high velocity starting point
+2. Allow maintaining velocity overtime
+3. Easy to understand
+4. Easy to change
+
+## 3. <a name='BestPractices'></a>Best Practices
+
+Below are best practices that should be followed and that we should help each other adhere to in code reviews.
+
+### 3.1. <a name='Dontaccessstoreincomponents'></a>Don't access \$store in components
+
+We don't want to couple components to the store implementation details. This will allow us to easily change the details of how the our store is implemented or even allow us to use something other than a vuex store in the future (an unlikley scenario but noble goal).
+
+#### 3.1.1. <a name='Howtoavoidstoreforactions'></a>How to avoid \$store for actions
+
+**Bad**
+
+```javascript
+  created() {
+    this.$store.dispatch('event/fetchEvents', {
+      perPage: this.perPage,
+      page: this.page
+    })
+  },
+```
+
+**Good**
+
+```javascript
+  created() {
+    this.fetchEvents({
+      // I don't know there is a store
+      perPage: this.perPage,
+      page: this.page
+    })
+  },
+  methods: {
+    ...mapActions({ fetchEvents: 'event/fetchEvents' })
+  },
+```
+
+#### 3.1.2. <a name='Howtoavoidstoreforgetters'></a>How to avoid \$store for state
+
+**Bad**
+
+```vue
+<EventCard
+  v-for="event in $store.state.event.events"
+  :key="event.id"
+  :event="event"
+/>
+```
+
+**_Bad_**
+
+```vue
+<EventCard v-for="event in event.events" :key="event.id" :event="event" />
+```
+
+```javascript
+  computed: {
+    event() {
+      return this.$store.state.event
+    }
+```
+
+**Good**
+
+```vue
+<EventCard v-for="event in event.events" :key="event.id" :event="event" />
+```
+
+```javascript
+  computed: {
+    ...mapState(['event'])
+  }
+```
+
+#### How to avoid \$store in getters
+
+We should put getters in the store that the data lives in. The details of how that data is accessed is a store concern. We want restructuring our state atom to be easy and easiest way to improve that is by coupling state access detials with the store, and not with the components.

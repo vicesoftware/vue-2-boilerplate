@@ -1,8 +1,8 @@
 import Vue from 'vue'
 import App from './App.vue'
 import router from './router'
-import store from './store/store'
-import BaseIcon from '@/modules/ui/BaseIcon'
+import store from './store'
+import BaseIcon from '@/ui/BaseIcon'
 
 Vue.component('BaseIcon', BaseIcon)
 
