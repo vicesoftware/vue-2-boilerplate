@@ -162,3 +162,9 @@ We don't want to couple components to the store implementation details. This wil
 #### How to avoid \$store in getters
 
 We should put getters in the store that the data lives in. The details of how that data is accessed is a store concern. We want restructuring our state atom to be easy and easiest way to improve that is by coupling state access detials with the store, and not with the components.
+
+## TODO
+[ ] Create testing sample
+[ ] Create testing documentation
+[ ] Document module pattern
+[ ] Document standard interface
