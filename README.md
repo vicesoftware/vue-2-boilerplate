@@ -1,4 +1,4 @@
-# Bisk Vue Boilerplate
+# Vue Boilerplate
 
 <!-- vscode-markdown-toc -->
 

@@ -1,7 +1,7 @@
 import * as types from './event.mutationTypes'
 
 export default {
-  [types.ADD_EVENT](state, event) {
+  [types.CREATE_EVENT_RECEIVED](state, event) {
     state.events.push(event)
   },
   [types.GET_EVENTS_RECEIVED](state, events) {
@@ -11,6 +11,9 @@ export default {
     state.eventsTotal = eventsTotal
   },
   [types.SET_EVENT](state, event) {
+    state.event = event
+  },
+  [types.GET_EVENT_RECEIVED](state, event) {
     state.event = event
   }
 }

@@ -1,9 +1,9 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
-import * as user from '@/features/user.js'
-import event from '@/features/event'
+import * as user from '@/modules/user.js'
+import event from '@/modules/event'
 import * as BusyIndicator from '@/ui/BusyIndicator'
-import * as notification from '@/features/notification.js'
+import * as notification from '@/modules/notification.js'
 
 Vue.use(Vuex)
 

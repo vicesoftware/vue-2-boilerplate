@@ -1,18 +1,19 @@
 import fetch from 'cross-fetch'
 import { actionTypes } from '@/ui/BusyIndicator'
 
-const request = (
+const request = ({
   url,
-  {
-    httpMethod = 'get',
-    httpConfig,
-    commit,
-    dispatch,
-    actionType,
-    errorMessage,
-    onResponse // handle response before streaming body via response.json
-  } = {}
-) => {
+  httpMethod = 'get',
+  httpConfig,
+  commit,
+  dispatch,
+  body,
+  actionType,
+  mapResponse,
+  errorMessage,
+  successMessage,
+  onResponse // handle response before streaming body via response.json
+} = {}) => {
   const requiredError = arg =>
     `You must specify a ${arg} argument when calling request({ ${arg} })`
 
@@ -28,9 +29,22 @@ const request = (
     throw new Error(requiredError('dispatch'))
   }
 
+  if (mapResponse && typeof mapResponse !== 'function') {
+    throw new Error('mapResponse must be a string')
+  }
+
   httpConfig = {
+    method: httpMethod,
     ...httpConfig,
-    ...buildHeaders(httpConfig, httpMethod)
+    ...buildHeaders(httpConfig)
+  }
+
+  if (body) {
+    if (!httpConfig) {
+      httpConfig = {}
+    }
+
+    httpConfig.body = JSON.stringify(body)
   }
 
   dispatch(actionTypes.increment, { actionType }, { root: true })
@@ -41,9 +55,17 @@ const request = (
         onResponse(response)
       }
 
+      if (successMessage) {
+        dispatch('notification/add', successMessage, { root: true })
+      }
+
       return response.json()
     })
     .then(body => {
+      if (mapResponse) {
+        body = mapResponse(body)
+      }
+
       commit(actionType, body)
 
       dispatch(actionTypes.decrement, { action: actionType }, { root: true })
