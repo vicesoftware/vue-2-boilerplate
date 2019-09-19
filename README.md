@@ -1,65 +1,100 @@
 # Vue Boilerplate
 
-<!-- vscode-markdown-toc -->
+<!-- TOC -->
 
 - [Vue Boilerplate](#vue-boilerplate)
-  - [1. <a name='Projectsetup'></a>Project setup](#1-a-nameprojectsetupaproject-setup)
-    - [1.1. <a name='Compilesandhot-reloadsfordevelopment'></a>Compiles and hot-reloads for development](#11-a-namecompilesandhot-reloadsfordevelopmentacompiles-and-hot-reloads-for-development)
-    - [1.2. <a name='Compilesandminifiesforproduction'></a>Compiles and minifies for production](#12-a-namecompilesandminifiesforproductionacompiles-and-minifies-for-production)
-    - [1.3. <a name='Lintsandfixesfiles'></a>Lints and fixes files](#13-a-namelintsandfixesfilesalints-and-fixes-files)
-  - [2. <a name='GoalsandValues'></a>Goals and Values](#2-a-namegoalsandvaluesagoals-and-values)
-  - [3. <a name='BestPractices'></a>Best Practices](#3-a-namebestpracticesabest-practices)
-    - [3.1. <a name='Dontaccessstoreincomponents'></a>Don't access \$store in components](#31-a-namedontaccessstoreincomponentsadont-access-store-in-components)
-      - [3.1.1. <a name='Howtoavoidstoreforactions'></a>How to avoid \$store for actions](#311-a-namehowtoavoidstoreforactionsahow-to-avoid-store-for-actions)
-      - [3.1.2. <a name='Howtoavoidstoreforstate'></a>How to avoid \$store for state](#312-a-namehowtoavoidstoreforstateahow-to-avoid-store-for-state)
-      - [3.1.3. <a name='Howtoavoidstoreingetters'></a>How to avoid \$store in getters](#313-a-namehowtoavoidstoreingettersahow-to-avoid-store-in-getters)
+  - [Project setup](#project-setup)
+    - [Compiles and hot-reloads for development](#compiles-and-hot-reloads-for-development)
+    - [Compiles and minifies for production](#compiles-and-minifies-for-production)
+    - [Lints and fixes files](#lints-and-fixes-files)
+  - [Goals and Values](#goals-and-values)
+  - [Folder Structure](#folder-structure)
+  - [Best Practices](#best-practices)
+    - [Don't access \$store in components](#dont-access-store-in-components)
+      - [How to avoid \$store for actions](#how-to-avoid-store-for-actions)
+      - [How to avoid \$store for state](#how-to-avoid-store-for-state)
+      - [How to avoid \$store in getters](#how-to-avoid-store-in-getters)
 
-<!-- vscode-markdown-toc-config
-	numbering=true
-	autoSave=true
-	/vscode-markdown-toc-config -->
-<!-- /vscode-markdown-toc -->
+<!-- /TOC -->
 
-## 1. <a name='Projectsetup'></a>Project setup
+## Project setup
 
 ```
 npm install
 ```
 
-### 1.1. <a name='Compilesandhot-reloadsfordevelopment'></a>Compiles and hot-reloads for development
+### Compiles and hot-reloads for development
 
 ```
 npm run serve
 ```
 
-### 1.2. <a name='Compilesandminifiesforproduction'></a>Compiles and minifies for production
+### Compiles and minifies for production
 
 ```
 npm run build
 ```
 
-### 1.3. <a name='Lintsandfixesfiles'></a>Lints and fixes files
+### Lints and fixes files
 
 ```
 npm run lint
 ```
 
-## 2. <a name='GoalsandValues'></a>Goals and Values
+## Goals and Values
 
 1. Create high velocity starting point
 2. Allow maintaining velocity overtime
 3. Easy to understand
 4. Easy to change
 
-## 3. <a name='BestPractices'></a>Best Practices
+## Folder Structure
+
+We are using the following folder structure
+
+```
+- src
+   - assets
+   - common
+   - layout
+   - modules
+   - ui
+   - views
+   - main.js
+   - router.js
+   - store.js
+```
+
+where
+
+- assets
+  - images and other static content
+- common
+  - crosscutting concerns other than UI widgets
+- layout
+  - components like `NavBar`, `Footer`, etc... that are just used to postion and style the page
+- modules
+  - contains self contianed commonjs modules contain one or more components, styles and/or vuex store related files. Each module would either map to an application feature or a domain entity.
+- ui
+  - contains cross cutting UI components like `Modal`, `BusyIndicator`, `NotificationPopup`. These are UI widgets that are used by lots of other components and generally not domain specific.
+- views
+  - contains all of the pages of our app that are registered with in `router.js`. This provides an easy starting point to finding code as you can browse the apps pages to find where you need to go.
+- main.js
+  - entry point to app
+- router.js
+  - contains Vue Router configuration
+- store.js
+  - root of Vuex store
+
+## Best Practices
 
 Below are best practices that should be followed and that we should help each other adhere to in code reviews.
 
-### 3.1. <a name='Dontaccessstoreincomponents'></a>Don't access \$store in components
+### Don't access \$store in components
 
 We don't want to couple components to the store implementation details. This will allow us to easily change the details of how the our store is implemented or even allow us to use something other than a vuex store in the future (an unlikley scenario but noble goal).
 
-#### 3.1.1. <a name='Howtoavoidstoreforactions'></a>How to avoid \$store for actions
+#### How to avoid \$store for actions
 
 **Bad**
 
@@ -87,7 +122,7 @@ We don't want to couple components to the store implementation details. This wil
   },
 ```
 
-#### 3.1.2. <a name='Howtoavoidstoreforstate'></a>How to avoid \$store for state
+#### How to avoid \$store for state
 
 **Bad**
 
@@ -124,6 +159,6 @@ We don't want to couple components to the store implementation details. This wil
   }
 ```
 
-#### 3.1.3. <a name='Howtoavoidstoreingetters'></a>How to avoid \$store in getters
+#### How to avoid \$store in getters
 
 We should put getters in the store that the data lives in. The details of how that data is accessed is a store concern. We want restructuring our state atom to be easy and easiest way to improve that is by coupling state access detials with the store, and not with the components.
