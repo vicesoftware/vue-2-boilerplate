@@ -1,6 +1,6 @@
-import mutations from './event.mutations'
-import * as getters from './event.getters'
-import * as actions from './event.actions'
+import mutations from './store/event.mutations'
+import * as getters from './store/event.getters'
+import * as actions from './store/event.actions'
 
 const state = {
   events: [],

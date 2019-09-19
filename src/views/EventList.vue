@@ -25,8 +25,8 @@
 </template>
 
 <script>
-import EventCard from '@/components/EventCard.vue'
-import { mapState } from 'vuex'
+import EventCard from '@/modules/event/EventCard.vue'
+import { mapState, mapActions } from 'vuex'
 
 export default {
   components: {
@@ -36,10 +36,14 @@ export default {
     this.perPage = 3 // Setting perPage here and not in data means it won't be reactive.
     // We don't need it to be reactive, and this way our component has access to it.
 
-    this.$store.dispatch('event/fetchEvents', {
+    this.fetchEvents({
+      // I don't know there is a store and could change if I wanted to
       perPage: this.perPage,
       page: this.page
     })
+  },
+  methods: {
+    ...mapActions({ fetchEvents: 'event/fetchEvents' })
   },
   computed: {
     page() {

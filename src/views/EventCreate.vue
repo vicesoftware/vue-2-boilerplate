@@ -10,25 +10,37 @@
       <h3>Name & describe your event</h3>
       <div class="field">
         <label>Title</label>
-        <input v-model="event.title" type="text" placeholder="Add an event title"/>
+        <input
+          v-model="event.title"
+          type="text"
+          placeholder="Add an event title"
+        />
       </div>
 
       <div class="field">
         <label>Description</label>
-        <input v-model="event.description" type="text" placeholder="Add a description"/>
+        <input
+          v-model="event.description"
+          type="text"
+          placeholder="Add a description"
+        />
       </div>
 
       <h3>Where is your event?</h3>
       <div class="field">
         <label>Location</label>
-        <input v-model="event.location" type="text" placeholder="Add a location"/>
+        <input
+          v-model="event.location"
+          type="text"
+          placeholder="Add a location"
+        />
       </div>
 
       <h3>When is your event?</h3>
 
       <div class="field">
         <label>Date</label>
-        <datepicker v-model="event.date" placeholder="Select a date"/>
+        <datepicker v-model="event.date" placeholder="Select a date" />
       </div>
 
       <div class="field">
@@ -38,11 +50,10 @@
         </select>
       </div>
 
-      <input type="submit" class="button -fill-gradient" value="Submit"/>
+      <input type="submit" class="button -fill-gradient" value="Submit" />
     </form>
   </div>
 </template>
-
 
 <script>
 import Datepicker from 'vuejs-datepicker'
