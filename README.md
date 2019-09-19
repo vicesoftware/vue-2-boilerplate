@@ -2,13 +2,17 @@
 
 <!-- vscode-markdown-toc -->
 
-- 1. [Project setup](#Projectsetup)
-     _ 1.1. [Compiles and hot-reloads for development](#Compilesandhot-reloadsfordevelopment)
-     _ 1.2. [Compiles and minifies for production](#Compilesandminifiesforproduction) \* 1.3. [Lints and fixes files](#Lintsandfixesfiles)
-- 2. [Goals and Values](#GoalsandValues)
-- 3. [Best Practices](#BestPractices)
-     _ 3.1. [Don't access \$store in components](#Dontaccessstoreincomponents)
-     _ 3.1.1. [How to avoid \$store for actions](#Howtoavoidstoreforactions) \* 3.1.2. [How to avoid \$store for getters](#Howtoavoidstoreforgetters)
+- [Vue Boilerplate](#vue-boilerplate)
+  - [1. <a name='Projectsetup'></a>Project setup](#1-a-nameprojectsetupaproject-setup)
+    - [1.1. <a name='Compilesandhot-reloadsfordevelopment'></a>Compiles and hot-reloads for development](#11-a-namecompilesandhot-reloadsfordevelopmentacompiles-and-hot-reloads-for-development)
+    - [1.2. <a name='Compilesandminifiesforproduction'></a>Compiles and minifies for production](#12-a-namecompilesandminifiesforproductionacompiles-and-minifies-for-production)
+    - [1.3. <a name='Lintsandfixesfiles'></a>Lints and fixes files](#13-a-namelintsandfixesfilesalints-and-fixes-files)
+  - [2. <a name='GoalsandValues'></a>Goals and Values](#2-a-namegoalsandvaluesagoals-and-values)
+  - [3. <a name='BestPractices'></a>Best Practices](#3-a-namebestpracticesabest-practices)
+    - [3.1. <a name='Dontaccessstoreincomponents'></a>Don't access \$store in components](#31-a-namedontaccessstoreincomponentsadont-access-store-in-components)
+      - [3.1.1. <a name='Howtoavoidstoreforactions'></a>How to avoid \$store for actions](#311-a-namehowtoavoidstoreforactionsahow-to-avoid-store-for-actions)
+      - [3.1.2. <a name='Howtoavoidstoreforstate'></a>How to avoid \$store for state](#312-a-namehowtoavoidstoreforstateahow-to-avoid-store-for-state)
+      - [3.1.3. <a name='Howtoavoidstoreingetters'></a>How to avoid \$store in getters](#313-a-namehowtoavoidstoreingettersahow-to-avoid-store-in-getters)
 
 <!-- vscode-markdown-toc-config
 	numbering=true
@@ -83,7 +87,7 @@ We don't want to couple components to the store implementation details. This wil
   },
 ```
 
-#### 3.1.2. <a name='Howtoavoidstoreforgetters'></a>How to avoid \$store for state
+#### 3.1.2. <a name='Howtoavoidstoreforstate'></a>How to avoid \$store for state
 
 **Bad**
 
@@ -120,6 +124,6 @@ We don't want to couple components to the store implementation details. This wil
   }
 ```
 
-#### How to avoid \$store in getters
+#### 3.1.3. <a name='Howtoavoidstoreingetters'></a>How to avoid \$store in getters
 
 We should put getters in the store that the data lives in. The details of how that data is accessed is a store concern. We want restructuring our state atom to be easy and easiest way to improve that is by coupling state access detials with the store, and not with the components.
