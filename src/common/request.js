@@ -1,5 +1,5 @@
 import fetch from 'cross-fetch'
-import { actionTypes } from '@/Store/BusyIndicator'
+import { actionTypes } from '@/store/busyIndicator'
 
 const request = ({
   url,
