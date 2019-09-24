@@ -1,8 +1,8 @@
 import Vue from 'vue'
-import EventCreate from '@/views/EventCreate.vue'
 import mountApp from '@/tests/mountApp'
 import waitFor from '@/tests/waitFor'
-import { expectByTestId, expectBySelector } from '@/tests/expect'
+import { expectByTestId } from '@/tests/expect'
+import { navigateToEventCreate } from './EventCreate.behaviors'
 import { mockFetch } from '@/__mocks__/cross-fetch'
 
 describe('Given we load app and we navigate to the event-create page ', () => {
@@ -10,12 +10,7 @@ describe('Given we load app and we navigate to the event-create page ', () => {
     Vue.config.errorHandler = done
 
     mountApp(done)
-      .then(
-        waitFor(({ wrapper, router }) => {
-          router.push({ name: 'event-create' })
-          expectBySelector(wrapper, EventCreate)
-        })
-      )
+      .then(navigateToEventCreate)
       .then(
         waitFor(({ wrapper }) => {
           mockFetch([
