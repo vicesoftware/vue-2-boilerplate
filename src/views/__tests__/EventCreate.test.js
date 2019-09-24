@@ -11,12 +11,8 @@ describe('Given we load app and we navigate to the event-create page ', () => {
 
     mountApp(done)
       .then(
-        waitFor(({ router }) => {
+        waitFor(({ wrapper, router }) => {
           router.push({ name: 'event-create' })
-        })
-      )
-      .then(
-        waitFor(({ wrapper }) => {
           expectBySelector(wrapper, EventCreate)
         })
       )
