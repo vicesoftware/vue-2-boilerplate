@@ -10,45 +10,47 @@ import { mockFetch } from '@/__mocks__/cross-fetch'
 
 jest.mock('cross-fetch')
 
-describe('Component', () => {
-  test('is a Vue instance', done => {
-    mockFetch([
-      {
-        url: 'events',
-        response: getEventsResponse
-      }
-    ])
+describe('Given we load app and are on the event-list page ', () => {
+  describe('When there are events on the server ', () => {
+    test('Then we are shown events in EventCards with correct data', done => {
+      mockFetch([
+        {
+          url: 'events',
+          response: getEventsResponse
+        }
+      ])
 
-    const localVue = createLocalVue()
+      const localVue = createLocalVue()
 
-    localVue.use(VueRouter)
+      localVue.use(VueRouter)
 
-    const wrapper = mount(App, {
-      router,
-      localVue,
-      store
-    })
+      const wrapper = mount(App, {
+        router,
+        localVue,
+        store
+      })
 
-    expect(wrapper.isVueInstance()).toBeTruthy()
+      expect(wrapper.isVueInstance()).toBeTruthy()
 
-    expect(wrapper.is(App)).toBeTruthy()
+      expect(wrapper.is(App)).toBeTruthy()
 
-    expect(wrapper.find(EventList)).toBeTruthy()
+      expect(wrapper.find(EventList)).toBeTruthy()
 
-    setTimeout(() => {
-      try {
-        const eventCards = wrapper.findAll(EventCard)
+      setTimeout(() => {
+        try {
+          const eventCards = wrapper.findAll(EventCard)
 
-        expect(eventCards.length).toBe(3)
+          expect(eventCards.length).toBe(3)
 
-        expect(eventCards.wrappers.map(e => ({ ...e.props() }))).toEqual(
-          getExpectedCards()
-        )
+          expect(eventCards.wrappers.map(e => ({ ...e.props() }))).toEqual(
+            getExpectedCards()
+          )
 
-        done()
-      } catch (e) {
-        done.fail(e)
-      }
+          done()
+        } catch (e) {
+          done.fail(e)
+        }
+      })
     })
   })
 })
