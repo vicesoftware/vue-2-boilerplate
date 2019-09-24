@@ -7,7 +7,9 @@
       <h5>Category: {{ event.category }}</h5>
     </div>
 
-    <BaseIcon name="map"><h2>Location</h2></BaseIcon>
+    <BaseIcon name="map">
+      <h2>Location</h2>
+    </BaseIcon>
 
     <address>{{ event.location }}</address>
 
@@ -16,9 +18,9 @@
 
     <h2>
       Attendees
-      <span class="badge -fill-gradient">{{
-        event.attendees ? event.attendees.length : 0
-      }}</span>
+      <span class="badge -fill-gradient">
+        {{ event.attendees ? event.attendees.length : 0 }}
+      </span>
     </h2>
     <ul class="list-group">
       <li
@@ -33,8 +35,12 @@
 </template>
 <script>
 import { mapState, mapActions } from 'vuex'
+import BaseIcon from '@/ui/BaseIcon'
 
 export default {
+  components: {
+    BaseIcon
+  },
   props: ['id'],
   created() {
     this.fetchEvent(this.id)
