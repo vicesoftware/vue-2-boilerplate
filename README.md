@@ -14,6 +14,7 @@
       - [How to avoid \$store for actions](#how-to-avoid-store-for-actions)
       - [How to avoid \$store for state](#how-to-avoid-store-for-state)
       - [How to avoid \$store in getters](#how-to-avoid-store-in-getters)
+  - [TODO](#todo)
 
 <!-- /TOC -->
 
@@ -164,7 +165,8 @@ We don't want to couple components to the store implementation details. This wil
 We should put getters in the store that the data lives in. The details of how that data is accessed is a store concern. We want restructuring our state atom to be easy and easiest way to improve that is by coupling state access detials with the store, and not with the components.
 
 ## TODO
+
 - [ ] Create testing sample
 - [ ] Create testing documentation
 - [ ] Document module pattern
-- [ ] Document standard interface
+- [ ] Document standard interfacea

@@ -12,9 +12,14 @@
 </template>
 
 <script>
+import BaseIcon from '@/ui/BaseIcon'
+
 export default {
   props: {
     event: Object
+  },
+  components: {
+    BaseIcon
   }
 }
 </script>
