@@ -1,55 +1,44 @@
-import { mount, createLocalVue } from '@vue/test-utils'
-import VueRouter from 'vue-router'
-import EventList from '../EventList.vue'
-import App from '@/App.vue'
+import waitForExpect from 'wait-for-expect'
 import EventCard from '@/components/EventCard.vue'
-import store from '@/store'
-import router from '@/router'
-import fetch from 'cross-fetch'
-import { mockFetch } from '@/__mocks__/cross-fetch'
-
-jest.mock('cross-fetch')
+import mountApp from '@/tests/mountApp'
 
 describe('Given we load app and are on the event-list page ', () => {
   describe('When there are events on the server ', () => {
     test('Then we are shown events in EventCards with correct data', done => {
-      mockFetch([
-        {
-          url: 'events',
-          response: getEventsResponse
-        }
-      ])
+      mountApp(done, { getEventsResponse }).then(({ wrapper }) => {
+        waitForExpect(() => {
+          try {
+            const eventCards = wrapper.findAll(EventCard)
 
-      const localVue = createLocalVue()
+            expect(eventCards.length).toBe(getEventsResponse().length)
 
-      localVue.use(VueRouter)
+            expect(eventCards.wrappers.map(e => ({ ...e.props() }))).toEqual(
+              getExpectedCards()
+            )
 
-      const wrapper = mount(App, {
-        router,
-        localVue,
-        store
+            done()
+          } catch (e) {
+            done.fail(e)
+          }
+        })
       })
+    })
+  })
 
-      expect(wrapper.isVueInstance()).toBeTruthy()
+  describe('When there are no events on the server ', () => {
+    it('Then we get no EventCards displayed', done => {
+      mountApp(done).then(({ wrapper }) => {
+        waitForExpect(() => {
+          try {
+            const eventCards = wrapper.findAll(EventCard)
 
-      expect(wrapper.is(App)).toBeTruthy()
+            expect(eventCards.length).toBe(0)
 
-      expect(wrapper.find(EventList)).toBeTruthy()
-
-      setTimeout(() => {
-        try {
-          const eventCards = wrapper.findAll(EventCard)
-
-          expect(eventCards.length).toBe(3)
-
-          expect(eventCards.wrappers.map(e => ({ ...e.props() }))).toEqual(
-            getExpectedCards()
-          )
-
-          done()
-        } catch (e) {
-          done.fail(e)
-        }
+            done()
+          } catch (e) {
+            done.fail(e)
+          }
+        })
       })
     })
   })
