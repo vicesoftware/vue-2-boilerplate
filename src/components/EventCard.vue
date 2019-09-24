@@ -1,4 +1,4 @@
-<template>
+Í<template>
   <router-link
     class="event-link"
     :to="{ name: 'event-show', params: { id: event.id } }"
