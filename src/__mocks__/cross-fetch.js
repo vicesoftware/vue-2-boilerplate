@@ -128,17 +128,21 @@ See readme for full details.
   }
   let foundUrl
 
-  const isGetOrDefault = stubUrlConfig =>
-    !stubUrlConfig.method || stubUrlConfig.method.toLowerCase() === 'get'
+  const stubConfigMethodIsGetAndCurConfigMethodIsUndefined = (
+    stubUrlConfig,
+    curConfig
+  ) =>
+    (!stubUrlConfig.method || stubUrlConfig.method.toLowerCase() === 'get') &&
+    curConfig.method.toLowerCase() === 'get'
 
   const stubMethodMatchesConfig = (stubUrlConfig, curConfig) =>
     stubUrlConfig.method &&
     curConfig.method &&
     curConfig.method.toLowerCase() === stubUrlConfig.method.toLowerCase()
 
-  const methodIsGetOrMethodsMatch = (stubUrlConfig, curConfig) =>
-    isGetOrDefault(stubUrlConfig) ||
-    stubMethodMatchesConfig(stubUrlConfig, curConfig)
+  const httpMethodsMatch = (stubUrlConfig, curConfig) =>
+    stubMethodMatchesConfig(stubUrlConfig, curConfig) ||
+    stubConfigMethodIsGetAndCurConfigMethodIsUndefined(stubUrlConfig, curConfig)
 
   const urlIncludesFragments = (url, fragments) => {
     if (fragments.reduce) {
@@ -155,7 +159,7 @@ See readme for full details.
 
   foundUrl = _stubConfig.find(
     stubUrlConfig =>
-      methodIsGetOrMethodsMatch(stubUrlConfig, config) &&
+      httpMethodsMatch(stubUrlConfig, config) &&
       urlIncludesFragments(url, stubUrlConfig.url)
   )
 

@@ -1,45 +1,58 @@
 import { mount, createLocalVue } from '@vue/test-utils'
+import waitForExpect from 'wait-for-expect'
+import EventCard from '@/components/EventCard.vue'
 import store from '@/store'
 import router from '@/router'
 import { mockFetch } from '@/__mocks__/cross-fetch'
 import VueRouter from 'vue-router'
 import EventList from '@/views/EventList.vue'
-import App from '@/App.vue'
+import App from '@/components/layout/App.vue'
+import { expectBySelector } from '@/tests/expect'
 import fetch from 'cross-fetch' // needed for module mocking with jest.mock below
 
 jest.mock('cross-fetch')
 
 export default function mountApp(done, { getEventsResponse } = {}) {
-  if (!done) {
-    throw Error('done is required!')
-  }
+  return new Promise(async resolve => {
+    if (!done) {
+      throw Error('done is required!')
+    }
 
-  try {
-    mockFetch([
-      {
-        url: 'events',
-        response: getEventsResponse || (() => [])
-      }
-    ])
+    const response = getEventsResponse || (() => [])
 
-    const localVue = createLocalVue()
+    try {
+      mockFetch([
+        {
+          url: 'events',
+          response
+        }
+      ])
 
-    localVue.use(VueRouter)
+      const localVue = createLocalVue()
 
-    const wrapper = mount(App, {
-      router,
-      localVue,
-      store
-    })
+      localVue.use(VueRouter)
 
-    expect(wrapper.isVueInstance()).toBeTruthy()
+      const wrapper = mount(App, {
+        router,
+        localVue,
+        store
+      })
 
-    expect(wrapper.is(App)).toBeTruthy()
+      expect(wrapper.isVueInstance()).toBeTruthy()
 
-    expect(wrapper.find(EventList)).toBeTruthy()
+      expect(wrapper.is(App)).toBeTruthy()
 
-    return Promise.resolve({ wrapper, store })
-  } catch (e) {
-    done.fail(e)
-  }
+      expectBySelector(wrapper, EventList)
+
+      await waitForExpect(() => {
+        const eventCards = wrapper.findAll(EventCard)
+
+        expect(eventCards.length).toBe(response().length)
+      })
+
+      resolve({ wrapper, store, router })
+    } catch (e) {
+      done.fail(e)
+    }
+  })
 }
