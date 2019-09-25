@@ -55,37 +55,40 @@ We are using the following folder structure
 
 ```
 - src
+   - __mocks__
    - assets
    - common
    - layout
-   - modules
-   - ui
+   - components
+      - layout
+   - store
    - views
    - main.js
    - router.js
-   - store.js
 ```
 
 where
 
-- assets
+- `__mocks__`
+  - contains Jest mocks that can be swapped with `node_modules` components at runtime in tests. See [Jest documentation](https://jestjs.io/docs/en/manual-mocks.html) for details.
+- `assets`
   - images and other static content
-- common
+- `common`
   - crosscutting concerns other than UI widgets
-- layout
-  - components like `NavBar`, `Footer`, etc... that are just used to postion and style the page
-- modules
-  - contains self contianed commonjs modules contain one or more components, styles and/or vuex store related files. Each module would either map to an application feature or a domain entity.
-- ui
-  - contains cross cutting UI components like `Modal`, `BusyIndicator`, `NotificationPopup`. These are UI widgets that are used by lots of other components and generally not domain specific.
-- views
+- `components`
+  - contains Vue components. For complext components that have more than one component put them in a `PascalCased` folder by the same name of the most commonly exported component (example Grid) and make that component the default export in your folders `index.js` file. If you ahve other related components that need to be exported (example Column, Row, etc...) then make those named exports in your `index.js`
+  - `layout`
+    - components like `NavBar`, `Footer`, etc... that are just used to postion and style the page
+- `store`
+  - default export is root of Vuex store
+  - contains one folder for each tree of the store and each store follows the standar interface described below
+- `views`
   - contains all of the pages of our app that are registered with in `router.js`. This provides an easy starting point to finding code as you can browse the apps pages to find where you need to go.
-- main.js
+- `main.js`
   - entry point to app
-- router.js
+- `router.js`
   - contains Vue Router configuration
-- store.js
-  - root of Vuex store
+
 
 ## Best Practices
 
