@@ -1,4 +1,4 @@
-# Vue Boilerplate
+# :rocket: Vue Boilerplate
 
 <!-- TOC -->
 
@@ -18,7 +18,7 @@
 
 <!-- /TOC -->
 
-## Project setup
+## :wrench: Project setup
 
 ```
 npm install
@@ -28,6 +28,24 @@ npm install
 
 ```
 npm run serve
+```
+
+or 
+
+```
+npm start
+```
+
+### Run Tests
+
+```
+npm test
+```
+
+To run without watch option `--watch`
+
+```
+npm run test:unit
 ```
 
 ### Compiles and minifies for production
@@ -42,14 +60,20 @@ npm run build
 npm run lint
 ```
 
-## Goals and Values
+to fix problems
+
+```
+npm run lint --fix
+```
+
+## :hearts: Goals and Values
 
 1. Create high velocity starting point
 2. Allow maintaining velocity overtime
 3. Easy to understand
 4. Easy to change
 
-## Folder Structure
+## :file_folder: Folder Structure
 
 We are using the following folder structure
 
@@ -90,7 +114,7 @@ where
   - contains Vue Router configuration
 
 
-## Best Practices
+## :trophy: Best Practices
 
 Below are best practices that should be followed and that we should help each other adhere to in code reviews.
 
@@ -166,10 +190,3 @@ We don't want to couple components to the store implementation details. This wil
 #### How to avoid \$store in getters
 
 We should put getters in the store that the data lives in. The details of how that data is accessed is a store concern. We want restructuring our state atom to be easy and easiest way to improve that is by coupling state access detials with the store, and not with the components.
-
-## TODO
-
-- [ ] Create testing sample
-- [ ] Create testing documentation
-- [ ] Document module pattern
-- [ ] Document standard interfacea
