@@ -1,7 +1,6 @@
 import mutations from './busyIndicator.mutations'
 import * as getters from './busyIndicator.getters'
 import * as actions from './busyIndicator.actions'
-import BusyIndicator from '@/components/BusyIndicator.vue'
 import { buildActionsTypes } from '@/common/vuexUtilities'
 
 const state = {
@@ -9,8 +8,6 @@ const state = {
 }
 
 const namespaced = true
-
-export default BusyIndicator
 
 export const MODULE_NAME = 'busyIndicator'
 

@@ -2,19 +2,20 @@
 
 <!-- TOC -->
 
-- [Vue Boilerplate](#vue-boilerplate)
-  - [Project setup](#project-setup)
+- [:rocket: Vue Boilerplate](#rocket-vue-boilerplate)
+  - [:wrench: Project setup](#wrench-project-setup)
     - [Compiles and hot-reloads for development](#compiles-and-hot-reloads-for-development)
+    - [Run Tests](#run-tests)
     - [Compiles and minifies for production](#compiles-and-minifies-for-production)
     - [Lints and fixes files](#lints-and-fixes-files)
-  - [Goals and Values](#goals-and-values)
-  - [Folder Structure](#folder-structure)
-  - [Best Practices](#best-practices)
+  - [:hearts: Goals and Values](#hearts-goals-and-values)
+  - [:file_folder: Folder Structure](#filefolder-folder-structure)
+  - [:trophy: Best Practices](#trophy-best-practices)
+    - [Avoid big store files by using commonjs modules](#avoid-big-store-files-by-using-commonjs-modules)
     - [Don't access \$store in components](#dont-access-store-in-components)
       - [How to avoid \$store for actions](#how-to-avoid-store-for-actions)
       - [How to avoid \$store for state](#how-to-avoid-store-for-state)
       - [How to avoid \$store in getters](#how-to-avoid-store-in-getters)
-  - [TODO](#todo)
 
 <!-- /TOC -->
 
