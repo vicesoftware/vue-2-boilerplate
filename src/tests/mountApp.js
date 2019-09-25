@@ -1,12 +1,12 @@
 import { mount, createLocalVue } from '@vue/test-utils'
 import waitForExpect from 'wait-for-expect'
-import EventCard from '@/modules/event/EventCard.vue'
+import EventCard from '@/components/EventCard.vue'
 import store from '@/store'
 import router from '@/router'
 import { mockFetch } from '@/__mocks__/cross-fetch'
 import VueRouter from 'vue-router'
 import EventList from '@/views/EventList.vue'
-import App from '@/layout/App.vue'
+import App from '@/components/layout/App.vue'
 import { expectBySelector } from '@/tests/expect'
 import fetch from 'cross-fetch' // needed for module mocking with jest.mock below
 

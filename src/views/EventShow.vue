@@ -18,9 +18,9 @@
 
     <h2>
       Attendees
-      <span class="badge -fill-gradient">
-        {{ event.attendees ? event.attendees.length : 0 }}
-      </span>
+      <span class="badge -fill-gradient">{{
+        event.attendees ? event.attendees.length : 0
+      }}</span>
     </h2>
     <ul class="list-group">
       <li
@@ -35,7 +35,7 @@
 </template>
 <script>
 import { mapState, mapActions } from 'vuex'
-import BaseIcon from '@/ui/BaseIcon'
+import BaseIcon from '@/components/BaseIcon'
 
 export default {
   components: {
