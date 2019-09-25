@@ -4,7 +4,7 @@ import router from '@/router'
 import { mockFetch } from '@/__mocks__/cross-fetch'
 import VueRouter from 'vue-router'
 import EventList from '@/views/EventList.vue'
-import App from '@/layout/App.vue'
+import App from '@/App.vue'
 import fetch from 'cross-fetch' // needed for module mocking with jest.mock below
 
 jest.mock('cross-fetch')
