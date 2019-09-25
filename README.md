@@ -118,6 +118,63 @@ where
 
 Below are best practices that should be followed and that we should help each other adhere to in code reviews.
 
+### Avoid big store files by using commonjs modules
+Over time our store files will get really large as they start containing all our filtering logic, http call logic, etc... To avoid this getting messy we are taking advantage of commonjs module pattern using a standard interface. For each store create we will create a new folder.
+
+```
+- store
+   - busyIndicator
+      - busyIndicator.actions.js
+      - busyIndicator.getters.js
+      - busyIndicator.mutations.js
+      - busyIndicator.mutationTypes.js
+      - index.js
+   - store.js
+```
+
+We will create one file for each of properties of the store object we need to export for the root store to consume and also for components to consume. The `index.js` file will export these four files using the standard interface shown below.
+
+```javascript
+import mutations from './busyIndicator.mutations'
+import * as getters from './busyIndicator.getters'
+import * as actions from './busyIndicator.actions'
+import { buildActionsTypes } from '@/common/vuexUtilities'
+
+// initial state of this store
+const state = {
+  count: 0
+}
+
+// creates namespaced actions which avoids name collision and also makes debugging easier as you know where an action came from
+const namespaced = true
+
+// allows for easier refactoring of store as we use this in the root store to specify the name of this store on the state atom
+export const MODULE_NAME = 'busyIndicator'
+
+// this is all the properties that are required for each store we add to root store. we combine them under this store element here for convience when wiring up to the root store
+export const store = {
+  state,
+  namespaced,
+  mutations,
+  getters,
+  actions
+}
+
+// Optional, allows other modules/components to easily call this modules actions
+export const actionTypes = buildActionsTypes(actions, MODULE_NAME)
+```
+Following this pattern has a number of advantages. One is that it make wiring up our new stores to the root store easy to setup and easy to refactor.
+
+```javascript
+export default new Vuex.Store({
+  modules: {
+    [BusyIndicator.MODULE_NAME]: BusyIndicator.store,
+    // other stores
+  },
+```
+
+Because we are using this approach if we rename our store it will be trivial to update the store as we can use the refactor tools of our IDE and just make sure we change `MODULE_NAME` in our store's `index.js` file and we are done. No magic strings to find and replace.
+
 ### Don't access \$store in components
 
 We don't want to couple components to the store implementation details. This will allow us to easily change the details of how the our store is implemented or even allow us to use something other than a vuex store in the future (an unlikley scenario but noble goal).
