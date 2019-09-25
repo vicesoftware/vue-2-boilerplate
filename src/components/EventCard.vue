@@ -12,7 +12,7 @@
 </template>
 
 <script>
-import BaseIcon from '@/ui/BaseIcon'
+import BaseIcon from '@/components/BaseIcon'
 
 export default {
   props: {
