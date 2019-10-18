@@ -7,7 +7,9 @@
       <h5>Category: {{ event.category }}</h5>
     </div>
 
-    <BaseIcon name="map"><h2>Location</h2></BaseIcon>
+    <BaseIcon name="map">
+      <h2>Location</h2>
+    </BaseIcon>
 
     <address>{{ event.location }}</address>
 
@@ -33,8 +35,12 @@
 </template>
 <script>
 import { mapState, mapActions } from 'vuex'
+import BaseIcon from '@/components/BaseIcon'
 
 export default {
+  components: {
+    BaseIcon
+  },
   props: ['id'],
   created() {
     this.fetchEvent(this.id)

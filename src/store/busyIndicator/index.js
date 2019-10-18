@@ -1,7 +1,7 @@
-import mutations from './store/busyIndicator.mutations'
-import * as getters from './store/busyIndicator.getters'
-import * as actions from './store/busyIndicator.actions'
-import BusyIndicator from './BusyIndicator'
+import mutations from './busyIndicator.mutations'
+import * as getters from './busyIndicator.getters'
+import * as actions from './busyIndicator.actions'
+import BusyIndicator from '@/components/BusyIndicator.vue'
 import { buildActionsTypes } from '@/common/vuexUtilities'
 
 const state = {

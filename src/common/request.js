@@ -1,5 +1,5 @@
 import fetch from 'cross-fetch'
-import { actionTypes } from '@/ui/BusyIndicator'
+import { actionTypes } from '@/store/busyIndicator'
 
 const request = ({
   url,
@@ -72,7 +72,13 @@ const request = ({
     })
     .catch(error => {
       console.log(
-        `Request error ${error}. We need to do something more interesting with these.`
+        `Request error occurred.
+
+        url: ${url}
+        config: ${JSON.stringify(httpConfig)}
+        error: ${error.stack}
+
+        We need to do something more interesting with these.`
       )
 
       dispatch(actionTypes.decrement, { action: actionType }, { root: true })

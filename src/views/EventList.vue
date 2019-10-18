@@ -25,7 +25,7 @@
 </template>
 
 <script>
-import EventCard from '@/modules/event/EventCard.vue'
+import EventCard from '@/components/EventCard.vue'
 import { mapState, mapActions } from 'vuex'
 
 export default {

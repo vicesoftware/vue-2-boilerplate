@@ -1,4 +1,4 @@
-<template>
+Í<template>
   <router-link
     class="event-link"
     :to="{ name: 'event-show', params: { id: event.id } }"
@@ -12,9 +12,14 @@
 </template>
 
 <script>
+import BaseIcon from '@/components/BaseIcon'
+
 export default {
   props: {
     event: Object
+  },
+  components: {
+    BaseIcon
   }
 }
 </script>
